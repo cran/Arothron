@@ -8,7 +8,8 @@ Calculate and Visualize local differences between two meshes}
 localmeshdiff(
   mesh1,
   mesh2,
-  ploton,
+  ploton = 1,
+  diffarea = ((area_shape1 - area_shape2)/area_shape2) * 100,
   paltot = rainbow(200),
   from = NULL,
   to = NULL,
@@ -26,6 +27,8 @@ localmeshdiff(
 \item{mesh2}{target mesh: object of class "mesh3d"}
 
 \item{ploton}{numeric: define which mesh will be used to visualize local differences}
+
+\item{diffarea}{formula: define how calculating differences in area. area_shape1 refers to mesh1, area_shape2 refers to mesh2}
 
 \item{paltot}{character vector: specify the colors which are used to create a color palette}
 
@@ -51,6 +54,27 @@ vect numeric vector containing local differeces in area between the reference an
 \description{
 localmeshdiff
 Calculate and Visualize local differences between two meshes
+}
+\examples{
+\dontrun{
+library(Arothron)
+library(rgl)
+data("primendoR")
+neaset<-primendoR$sets[,,11]
+sapset<-primendoR$sets[,,14]
+#defining a mesh for the neanderthal right hemisphere
+neasur<-list("vb"=t(cbind(neaset,1)),"it"=primendoR$sur$it)
+class(neasur)<-"mesh3d"
+#defining a mesh for the modern human right hemisphere
+sapsur<-list("vb"=t(cbind(sapset,1)),"it"=primendoR$sur$it)
+class(neasur)<-"mesh3d"
+layout3d(t(c(1,2)),sharedMouse = TRUE)
+localmeshdiff(sapsur,neasur,1,scale01 = TRUE,
+paltot=c("darkred","red","orange","white","lightblue","blue","darkblue"))
+next3d()
+localmeshdiff(neasur,sapsur,1,scale01 = TRUE,
+paltot=c("darkred","red","orange","white","lightblue","blue","darkblue"))
+}
 }
 \references{
 Melchionna, M., Profico, A., Castiglione, S., Sansalone, G., Serio, C., Mondanaro, A., ... & Manzi, G. (2020). 

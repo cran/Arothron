@@ -53,7 +53,7 @@ pov_selecter<-function (mesh, grid,start.points=250,method="ast3d"){
       j <- j + 1
       keep <- keep[-length(keep)]
       j <- j - 1
-      rgl.close()
+      close3d()
       open3d()
       ids <- plot3d(grid, size = radius.s, col = "red", type = "s", 
                     box = FALSE, axes = FALSE, aspect = FALSE, xaxis = NULL, 
@@ -66,7 +66,7 @@ pov_selecter<-function (mesh, grid,start.points=250,method="ast3d"){
     }
   }
   selection <- grid[keep, ]
-  rgl.close()
+  close3d()
   return(selection)
   }
   if(method=="a"){
@@ -115,7 +115,7 @@ pov_selecter<-function (mesh, grid,start.points=250,method="ast3d"){
         j = j + 1
         keep = keep[-length(keep)]
         j = j - 1
-        rgl.close()
+        close3d()
         open3d()
         ids <- plot3d(grid, size = radius.s, col = "red", type = "s", 
                       box = FALSE, axes = FALSE, aspect = FALSE, xaxis = NULL, 
@@ -128,7 +128,7 @@ pov_selecter<-function (mesh, grid,start.points=250,method="ast3d"){
       }
     }
     selection <- grid[keep, ]
-    rgl.close()
+    close3d()
     return(selection)
   }
 }
